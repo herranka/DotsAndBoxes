@@ -8,12 +8,12 @@ public class Box extends BoardElement{
     this.col = col;
     this.fillColor = BOX_COLOR;
   }
-  public BoardElement[] getLines(){
-    return new BoardElement[]{
-      board.get(row-1).get(col), 
-      board.get(row).get(col+1), 
-      board.get(row+1).get(col), 
-      board.get(row).get(col-1)
+  public Line[] getLines(){
+    return new Line[]{
+      (Line)board.get(row-1).get(col), 
+      (Line)board.get(row).get(col+1), 
+      (Line)board.get(row+1).get(col), 
+      (Line)board.get(row).get(col-1)
     };
   }
 }

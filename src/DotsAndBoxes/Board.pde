@@ -41,18 +41,21 @@ public class Board{
   }
   public void reset(int w){
     this.w = w;
+    // messy shit incoming
     //final double a = (DOT_BOX_RATIO*(w + 1) + width);
     //final int b = (int)((width / a) * a);
     //this.origin = new int[] {(width - b)/2,(width - b)/2 + height};
     double boardWidthBox = ((w+1)*DOT_BOX_RATIO + w); // width expressed in boxWidths
     int boardWidth = (int)(((int)(width / boardWidthBox))*boardWidthBox);
-    int x = (int)((width - boardWidth)/2);
+    this.dotWidth = (int) ((DOT_BOX_RATIO / boardWidthBox) * boardWidth);
+    //this.boxWidth = (int) (boardWidth / boardWidthBox);
+    this.boxWidth = (int) (dotWidth / DOT_BOX_RATIO);
+    boardWidth = (w+1)*dotWidth + w*boxWidth;
+    int x = (int)((double)(width-boardWidth)/2); 
     int y = height - boardWidth - x;
+    
     this.origin = new int[]{x,y};
     this.menuOrigin = new int[]{x,x};
-    
-    this.dotWidth = (int) ((DOT_BOX_RATIO / boardWidthBox) * boardWidth);
-    this.boxWidth = (int) (boardWidth / boardWidthBox);
     this.board = newBoard(w);
   }
   
@@ -65,7 +68,7 @@ public class Board{
         fill(o.getFillColor());
         rect(pos[0], pos[1], o.getWidth(), o.getHeight());
         if (b == row.size()-1){
-          pos = new int[]{origin[0], origin[1] + o.getHeight()};
+          pos = new int[]{origin[0], pos[1] + o.getHeight()};
         }
         else{
           pos = new int[]{pos[0] + o.getWidth(), pos[1]};
@@ -73,6 +76,24 @@ public class Board{
         
       }
     }
+  }
+  
+  public BoardElement getObjectAtPos(int x, int y){
+    int[] pos = new int[] {x,y};
+    int[] cPos = this.origin;
+    for (int a = 0; a < this.board.size(); a++){
+      ArrayList<BoardElement> row = this.board.get(a);
+      for (int b = 0; b < row.size(); b++){
+        BoardElement o = row.get(b);
+        if (cPos[0] <= pos[0] && pos[0] < cPos[0]+o.getWidth() &&
+          cPos[1] <= pos[1] && pos[1] < cPos[1]+o.getHeight()) return o;
+        if (b == row.size()-1) cPos = new int[] {this.origin[0], cPos[1]+o.getHeight()};
+        else cPos = new int[] {cPos[0]+o.getWidth(), cPos[1]};
+        // DEBUG
+        if (b == row.size()-1){System.out.print(cPos[0]);System.out.print(" "); System.out.println(cPos[1]);}
+      }
+    }
+    return null;
   }
   
   

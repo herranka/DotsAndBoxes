@@ -18,7 +18,7 @@ public class Line extends BoardElement{
     this.filled = false;
     this.fillColor = LINE_COLOR;
   }
-  public BoardElement[] getBoxes(){
+  public Box[] getBoxes(){
     ArrayList<BoardElement> boxes = new ArrayList<BoardElement>();
     if (horizontal){
       if (row != 0){boxes.add(board.get(row-1).get(col));}
@@ -28,7 +28,7 @@ public class Line extends BoardElement{
       if (col != 0){boxes.add(board.get(row).get(col-1));}
       if (col < board.size()-1){boxes.add(board.get(row).get(col+1));}
     }
-    return boxes.toArray(new BoardElement[boxes.size()]);
+    return boxes.toArray(new Box[boxes.size()]);
   }
   public Line(Board board, int row, int col){this(board, row, col, true);}
   
@@ -37,4 +37,9 @@ public class Line extends BoardElement{
     else {return fillColor;}
   }
   public boolean isHorizontal(){return this.horizontal;}
+  
+  public boolean isFilled(){return this.filled;}
+  public void setFilled(boolean b){
+    this.filled = b;
+  }
 }
