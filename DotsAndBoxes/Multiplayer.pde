@@ -46,11 +46,8 @@ public class Multiplayer extends Gamemode{
   public void click(int mX, int mY){
     BoardElement clickedObject = this.board.getObjectAtPos(mX, mY);
     if (clickedObject != null){
-      if (clickedObject instanceof Line){
+      if (clickedObject instanceof Line && ((Line)clickedObject).isFilled() != true){
         // fill line
-        if (((Line)clickedObject).getFilled() != true){ //TODO: add getFilled to line!
-          
-        }
         ((Line)clickedObject).setFilled(true);
         
         // check if last line filled of box
@@ -93,7 +90,7 @@ public class Multiplayer extends Gamemode{
     }
     else{
       // check if any buttons are clicked
-      for (Button button : buttons){ // TODO: make function of following?
+      if (buttons != null) for (Button button : buttons){ // TODO: make function of following?
         if (mX >= button.getX() && mY >= button.getY() && mX < button.getX()+button.getWidth() && mY < button.getY()+button.getHeight()){
           button.click();
           break;
