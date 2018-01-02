@@ -29,6 +29,7 @@ public Screen currentScreen;
 public void setup(){
   size(360, 640);
   currentScreen = new Multiplayer(BOARD_WIDTH);
+  ((Multiplayer)currentScreen).reset();
 }
 public void draw(){
   background(BACKGROUND_COLOR);

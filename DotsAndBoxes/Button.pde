@@ -34,7 +34,7 @@ public class Button{
     if (icon != null) image(icon, x+w/10, y+h/10, w-w/5, h-h/5); //centers image within borders of rect
   }
   public void click(){
-    currentScreen = action;
+    if (action != null) currentScreen = action;
   }
   public color getFillColor(){return fillColor;}
   public int getX(){return x;}

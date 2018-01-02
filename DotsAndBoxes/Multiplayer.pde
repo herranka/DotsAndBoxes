@@ -1,21 +1,17 @@
 
 public class Multiplayer extends Gamemode{
+  int w;
+  
   public Multiplayer(int w){
+    this.w = w;
     this.originScreen = null;
-    reset(w);
   }
   public Multiplayer(int w, Screen menu){
+    this.w = w;
     this.originScreen = menu;
-    reset(w);
   }
-  
-//TODO: rename posInObject -> posOnMenuItem ?
-//  public boolean posInObject(int[] pos, MenuItem o){ //pos is x,y coordinates
-//    if (pos[0] >= o.x && pos[0] <= o.x+o.width && pos[1] >= o.y && pos[1] <= o.y+o.height) return true;
-//    else return false;
-//  }
     
-  public void reset(int w){
+  public void reset(){
     this.players = new Player[]{new Player("Blue", color(0,0,255)), 
       new Player("Red", color(255,0,0))};
     this.currentPlayer = this.players[0];
@@ -23,8 +19,7 @@ public class Multiplayer extends Gamemode{
     //Screen resetMulti = new Multiplayer(w, originScreen);
     
     // TODO: FIX BUTTON INITIALIZING RECURSION
-    //this.buttons = new Button[]{new Button(5,5,50,50,originScreen, -1, "MenuIcon.png"), new Button(5,width-55,50,50,new Multiplayer(w, originScreen), -1, "ResetIcon.png")};
-    //this.buttons = new Button[]{new Button(5,width-55,50,50,new Multiplayer(w, originScreen), -1, "MenuIcon.png")};
+    this.buttons = new Button[]{new Button(5,5,50,50,originScreen, -1, "MenuIcon.png"), new Button(60,5,50,50,new Multiplayer(w, originScreen), -1, "ResetIcon.png")};
     this.highlightedObject = null;
     // TODO: add upper menu
   }
@@ -38,6 +33,7 @@ public class Multiplayer extends Gamemode{
   
   public void draw(){
     // draw board
+    if (board == null) this.reset();
     board.draw();
     // draw buttons
     if (buttons != null) for (Button button : buttons) button.draw();
