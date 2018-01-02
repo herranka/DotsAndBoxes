@@ -60,6 +60,8 @@ public class Board{
   }
   
   public void draw(){
+    noStroke(); // TODO: maybe change to StrokeWeight(0)
+    fill(BOX_COLOR);
     int[] pos = origin;
     for (int a = 0; a < this.board.size(); a++){
       ArrayList<BoardElement> row = this.board.get(a);

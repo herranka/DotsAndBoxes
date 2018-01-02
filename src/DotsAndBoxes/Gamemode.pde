@@ -3,7 +3,7 @@ public class Gamemode extends Screen{
   Player currentPlayer;
   Board board;
   BoardElement highlightedObject;
+  Button[] buttons;
   //boolean running;
-  Screen menu;
   // TODO: add upper menu
 }

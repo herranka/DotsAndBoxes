@@ -1,4 +1,9 @@
 import java.lang.Math;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
 
 // Colors
 public final color RED = color(255, 0, 0);
@@ -19,12 +24,10 @@ public final int BOARD_WIDTH = 3; // inital value
 public final double DOT_BOX_RATIO = ((float) 1/6);
 public final String FONT = "Arial";
 
-public Board b;
 public Screen currentScreen;
 
 public void setup(){
   size(360, 640);
-  noStroke();
   currentScreen = new Multiplayer(BOARD_WIDTH);
 }
 public void draw(){
